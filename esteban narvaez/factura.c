@@ -6,7 +6,8 @@ int main (int argc, char *argv[]) {
     float num1=0, num2=0, num3=0, num4=0, num5=0;
     float subtotal=0, total=0;
     char opcion;
-    char nombre[50], cedula[20];
+    char nombre[50]; 
+    char cedula[20];
 
     printf ("Bienvenido al sistema de facturación");
     printf ("Elija el producto a comprar \n");
@@ -73,8 +74,8 @@ scanf("%s\n", &cedula);
 printf("########################################");
 printf("Factura########################################\n");
 
-printf("Nombre: \n", nombre);
-printf("Cedula: \n", cedula);
+printf("Nombre: %s\n", nombre);
+printf("Cedula: %s\n", cedula);
 printf("Producto            Cantidad            Precio Unitario      Precio Total\n");
 
 if (num1!=0){
