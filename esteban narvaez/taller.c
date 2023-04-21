@@ -1,57 +1,49 @@
 #include <stdio.h>
+#include "menus/menus.h"
+#include "modulos/modulos.h"
 
 int main (int argc, char *argv[]) {
 
-    float subtotal1=0, subtotal2=0, subtotal3=0, subtotal4=0, subtotal5=0;
-    float precio1=150, precio2=55, precio3=180, precio4=70, precio5=120;
-    float num1=0, num2=0, num3=0, num4=0, num5=0;
+    float s1=0, s2=0, s3=0, s4=0, s5=0;
+    float p1=150, p2=55, p3=180, p4=70, p5=120;
+    float n1=0, n2=0, n3=0, n4=0, n5=0;
     float subtotal=0, total=0, descuento=0;
     char opcion, menu;
     int resp;
     char nombre[50], cedula[20];
 
 do{
-    printf ("Bienvenido al sistema de facturacion\n");
-    printf("Eliga una de las siguientes opciones\n");
-    printf ("a) Facturar producto\n");
-    printf ("b) Imprimir factura\n");
-    printf ("c) Salir\n");
-    scanf(" %c", &menu);
-
+    menu=menuprincipal();
     switch (menu)
     {
     case 'a':
-        do{
-            printf ("Elija el producto a comprar \n");
-            printf ("a) Llantas (precio $150) \n");
-            printf ("b) Kit pastillas de freno (precio $55) \n");
-            printf ("c) Kit de embrague (precio $180) \n");
-            printf ("d) Faro (precio $70) \n");
-            printf ("e) Radiador (precio $120) \n");
-            scanf(" %c", &opcion);
+        do
+        {
+            
+            opcion=menuproducto();
 
             switch (opcion)
             {
             case 'a':
                 printf("Ingrese el numero de llantas que desea facturar\n");
-                scanf("%f", &num1);
+                scanf("%f", &n1);
                 break;
 
             case 'b':
                 printf("Ingrese el numero de kit de pastillas de freno\n");
-                scanf("%f", &num2);
+                scanf("%f", &n2);
                 break;
             case 'c':
                 printf("Ingrese el numero de kit de embrague\n");
-                scanf("%f", &num3);
+                scanf("%f", &n3);
                 break;
             case 'd':
                 printf("Ingrese el numero de faros\n");
-                scanf("%f", &num4);
+                scanf("%f", &n4);
                 break;
             case 'e':
                 printf("Ingrese el numero de radiadores\n");
-                scanf("%f", &num5);
+                scanf("%f", &n5);
                 break;
             default:
                 printf("Opcion no valida\n");
@@ -67,50 +59,29 @@ do{
 
         case'b':
 
-            subtotal1=num1*precio1;
-            subtotal2=num2*precio2;
-            subtotal3=num3*precio3;
-            subtotal4=num4*precio4;
-            subtotal5=num5*precio5;
+            s1=n1*p1;
+            s2=n2*p2;
+            s3=n3*p3;
+            s4=n4*p4;
+            s5=n5*p5;
     
-            subtotal=subtotal1+subtotal2+subtotal3+subtotal4+subtotal5;
-            if (subtotal>500 && subtotal <=1000)
-            {
-                total=subtotal*0.96;
-            }
-            else if(subtotal>1000 && subtotal<=5000)
-            {
-                total=subtotal*0.93;
-            }
-            else if(subtotal>5000)
-            {
-            total=subtotal*0.91;
-            }
+            subtotal=s1+s2+s3+s4+s5;
+            
+            subtotal=calculosubtotal(subtotal);
+
                 descuento=subtotal-total;
-        printf("Ingrese el nombre del cliente: \n");
-        scanf("%s", &nombre);
-        printf("Ingrese la cedula del cliente: \n");
-        scanf("%s", &cedula);
-        printf("########################################");
-        printf("Factura########################################\n");
-        printf("Nombre: %s\n", nombre);
-        printf("Cedula: %s\n", cedula);
-        printf("Producto                Cantidad        Precio Unitario     Precio Total\n");
-            if (num1!=0){
-                printf("Llantas                   %.0f                %.2f               %.2f\n", num1, precio1,subtotal1);
-            }
-            if (num2!=0){
-                printf("Kit de pastillas          %.0f                %.2f               %.2f\n", num2, precio2,subtotal2);
-            }
-            if (num3!=0){
-                printf("Kit de embrague           %.0f                %.2f               %.2f\n", num3, precio3,subtotal3);
-            }
-            if (num4!=0){
-                printf("Faros                     %.0f                %.2f               %.2f\n", num4, precio4,subtotal4);
-            }
-            if (num5!=0){
-                printf("Radiadores                %.0f                %.2f               %.2f\n", num5, precio5,subtotal5);
-            }
+
+            printf("\nIngrese el nombre del cliente: \n");
+            scanf("%s", &nombre);
+            printf("Ingrese la cedula del cliente: \n");
+            scanf("%s", &cedula);
+            
+                imprimirfactura(n1,n2, n3, n4, n5, 
+                                p1, p2, p3, p4, p5,
+                                s1, s2, s3, s4, s5, 
+                                nombre, cedula);
+
+            
                 printf("El subtotal es: %.2f\n", subtotal);
                         if    (subtotal>500 && subtotal <=1000)
                     {
@@ -137,4 +108,6 @@ do{
 } while (resp==0 && menu=='a');
     
     return 0;
+
 }
+
